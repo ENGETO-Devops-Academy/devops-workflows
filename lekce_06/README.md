@@ -1,6 +1,6 @@
 ![engeto](https://engeto.cz/wp-content/uploads/2018/12/engeto-main-brand.png)
 
-# DevOps Academy - Lesson #3 - CI/CD
+# DevOps Academy - Lesson #6 - CI/CD
 
 ## Goal & structure of this lesson
 
