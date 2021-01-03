@@ -1,0 +1,67 @@
+---
+- hosts: all
+
+  tags: prepare
+
+  tasks:
+    - name: all | Install microk8s
+      snap:
+        name: microk8s
+        classic: true
+      become: true
+
+    - name: all | Append microk8s group to ubuntu user's groups
+      user:
+        name: ubuntu
+        groups: microk8s
+        append: yes
+      become: yes
+
+    - name: all | Change owner of the ~/.kube folder
+      file:
+        path: /home/ubuntu/.kube
+        owner: ubuntu
+        group: microk8s
+        recurse: yes
+      become: yes
+
+    - name: all | Start microk8s
+      command: >-
+        /snap/bin/microk8s start
+      become: yes
+
+    - name: all | Wait for the services to initialize
+      command: >-
+        /snap/bin/microk8s status --wait-ready
+      become: yes
+
+
+- hosts: kube_master
+  tasks:
+    - block:
+        - name: kube-master | Generate tokens for Kube nodes
+          command: >-
+            openssl rand -hex 16 
+          register: cmd
+
+        - set_fact:
+            master_token: "{{ cmd.stdout }}"
+            cacheable: true
+
+        - name: kube-master | Generate connection string
+          command: >-
+            /snap/bin/microk8s add-node
+            --token-ttl="3600"
+            --token={{ master_token }}
+      tags: master
+
+    - name: kube-nodes | Add worker nodes to the Kubernetes master
+      tags: nodes
+      command: >-
+        /snap/bin/microk8s join {{ ansible_host }}:25000/{{ master_token }}
+      delegate_to: "{{ item }}"
+      with_inventory_hostnames: kube_nodes
+
+    - name: kube_master | Enable microk8s DNS and Storage plugins
+      command: >-
+        /snap/bin/microk8s enable dns storage

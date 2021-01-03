@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SNAP_DATA=${SNAP_DATA:-$PWD}
+
+
+export ETCDCTL_CERT=${SNAP_DATA}/certs/server.crt
+export ETCDCTL_CACERT=${SNAP_DATA}/certs/ca.crt
+export ETCDCTL_KEY=${SNAP_DATA}/certs/server.key
+
+export ETCDCTL_ENDPOINTS=http://0.0.0.0:2380
+
+ETCDCTL_API=${ETCDCTL_API:-3} etcdctl "$@"
