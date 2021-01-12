@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tester
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: test
+spec:
+  rules:
+  - host: 34-107-185-129.nip.io
+    http:
+      paths:
+      - path: /deploy-0/*
+        backend:
+          serviceName: deploy-0
+          servicePort: 8080
