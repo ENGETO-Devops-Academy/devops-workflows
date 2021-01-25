@@ -1,0 +1,61 @@
+# See the full specification at https://github.com/helm/charts/blob/master/stable/prometheus/values.yaml
+
+alertmanager:
+
+  resources:
+    limits:
+      cpu: 20m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+  persistentVolume:
+    ## If true, alertmanager will create/use a Persistent Volume Claim
+    ## If false, use emptyDir
+    ##
+    enabled: false
+
+
+server:
+
+  resources:
+    limits:
+      cpu: 200m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+
+  ## namespaces to monitor (instead of monitoring all - clusterwide). Needed if you want to run without Cluster-admin privileges.
+  namespaces:
+    - kube-system
+    - engeto
+    - monitoring
+
+  persistentVolume:
+    ## If true, alertmanager will create/use a Persistent Volume Claim
+    ## If false, use emptyDir
+    ##
+    enabled: false
+
+  emptyDir:
+    sizeLimit: 256Mi
+
+  # IMPORTANT in order for Prometheus to be able to talk to the API server
+  nodeSelector:
+    kubernetes.io/role: master
+
+
+pushgateway:
+  enabled: false
+
+
+nodeExporter:
+  ## If false, node-exporter will not be installed
+  ##
+  enabled: true
+
+  ## If true, node-exporter pods share the host network namespace
+  ##
+  hostNetwork: true

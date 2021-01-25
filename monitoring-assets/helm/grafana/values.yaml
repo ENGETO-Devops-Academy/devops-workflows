@@ -1,0 +1,51 @@
+## Configure grafana dashboard providers
+## ref: http://docs.grafana.org/administration/provisioning/#dashboards
+##
+## `path` must be /var/lib/grafana/dashboards/<provider_name>
+##
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    prometheus-stats:
+      # Ref: https://grafana.com/dashboards/2
+      gnetId: 2
+      revision: 2
+      datasource: Prometheus
+    node-exporter:
+      # Ref: https://grafana.com/dashboards/11074
+      gnetId: 11074
+      revision: 2
+      datasource: Prometheus
+
+ingress:
+  enabled: true
+
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+  hosts:
+    - monitoring.cloud.engeto.com
+
+  path: /grafana($|/)(.*)
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+grafana.ini:
+  server:
+    # The full public facing url you use in browser, used for redirects and emails
+    root_url: http://monitoring.cloud.engeto.com/grafana
