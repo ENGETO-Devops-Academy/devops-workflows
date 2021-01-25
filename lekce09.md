@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://engeto.cz/wp-content/uploads/2018/12/engeto-main-brand.png" alt="ENGETO Academy">
+  <img src="/assets/engeto-logo.png" alt="ENGETO Academy">
 </p>
 
 # Lesson #9: Monitoring, logging & alerting
