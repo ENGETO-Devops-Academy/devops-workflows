@@ -280,3 +280,11 @@ A **webhook** is an endpoint exposed by your application which consumes an event
 <p align="center">
   <img src="/assets/alerta-opt.png" alt="Alerta">
 </p>
+
+### Honorable mentions
+ * https://logz.io/
+ * https://adamtheautomator.com/the-ultimate-guide-to-setting-up-zabbix-5-0-monitoring/
+ * https://docs.datadoghq.com/getting_started/
+ * https://www.splunk.com/ & https://intellipaat.com/blog/tutorial/splunk-tutorial/
+ * https://www.solarwinds.com/server-application-monitor
+ * https://www.graylog.org/
