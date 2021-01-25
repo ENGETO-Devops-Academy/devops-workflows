@@ -29,7 +29,7 @@ At the very least, it is important to have a persistent and accessible storage o
 
 The OS maintains a log of events that helps in monitoring, administering and troubleshooting the system in addition to helping users get information about important processes.
 
-Some of the events include system **errors**, **warnings**, **startup messages**, **system changes**, **abnormal shutdowns**, etc. This list is applicable to most versions of the three common OSs (Windows, Linux and Mac OS).
+Some events include system **errors**, **warnings**, **startup messages**, **system changes**, **abnormal shutdowns**, etc. This list is applicable to most versions of the three common OSs (Windows, Linux and Mac OS).
 
 The logs handled by syslog are available in `/var/log/` directory on Linux system.
 
@@ -148,12 +148,12 @@ There are some third-party solutions that can help you achieve that. Probably th
 ## 3. Monitoring
 One of the best ways to gain this insight is with a robust monitoring system that gathers metrics, visualises data, and alerts operators when things appear to be broken.
 
-> What we call **monitoring** here should for better calrity be called "metrics gathering and dashboarding", if we want to break the whole concept to three pillars (as name of this lesson suggest). However, in practice, we use the term "monitoring" for anything related to logging, mertics gathering, dashboarding and alerting. So, next time you're asked to build a proper monitoring infrastructure, make sure not to forget about logging and alerting!
+> What we call **monitoring** here should for better clarity be called "metrics gathering and dashboarding", if we want to break the whole concept to three pillars (as name of this lesson suggest). However, in practice, we use the term "monitoring" for anything related to logging, metrics gathering, dashboarding and alerting. So, next time you're asked to build a proper monitoring infrastructure, make sure not to forget about logging and alerting!
 
 ### Parts of a monitoring system
 **1. Distributed Monitoring Agents and Data Exporters**
  * a small application designed to collect and forward data to a collection endpoint
- * run as always-on daemons on each host (or a service or sidecar as part of a deployed containerzied application) throughout the system
+ * run as always-on daemons on each host (or a service or sidecar as part of a deployed containerized application) throughout the system
  * the agent must use minimal resources and be able to operate with little to no management
  * typically collect generic, host-level metrics, but agents to monitor software like web or database servers are available as well
 
@@ -233,7 +233,7 @@ I recommend you to take a look at the [show-off](https://www.elastic.co/kibana) 
   <img src="/assets/kibana-dashboard-opt.png" alt="Kibana Dashboard">
 </p>
 
-**Grafana** development is also not stale and it's up to your teste which one you prefer, Grafana or Kibana, both will get the job done. I recommend checking out the official documentation to learn more about [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/). It is a free yet powerful tool in your hands!
+**Grafana** development is also not stale, and it's up to your taste which one you prefer, Grafana or Kibana, both will get the job done. I recommend checking out the official documentation to learn more about [Grafana](https://grafana.com/docs/grafana/latest/getting-started/what-is-grafana/). It is a free yet powerful tool in your hands!
 
 <p align="center">
   <img src="/assets/grafana-dashboard-opt.png" alt="Grafana Dashboard">
@@ -242,12 +242,12 @@ I recommend you to take a look at the [show-off](https://www.elastic.co/kibana) 
 ## 4. Alerting
 While monitoring systems are incredibly useful for active interpretation and investigation, one of the primary benefits of a complete monitoring system is letting administrators disengage from the system. Alerts allow you to define situations that make sense to actively manage, while relying on the passive monitoring of the software to watch for changing conditions[0].
 
-> Alerting is the responsive component of a monitoring system that performs actions based on changes in metric values. Alerts definitions are composed of two components: a metrics-based condition or threshold, and an action to perform when the values fall outside of the acceptable conditions.
+> Alerting is the responsive component of a monitoring system that performs actions based on changes in metric values. Alerts definitions are composed of two components: a metrics-based condition or threshold, and an action to perform when the values fall outside the acceptable conditions.
 
 ### Alerts
 > An alert is an action that is triggered when a certain condition is met.
 
-Dashboards are great for actively checking system metrics. However, in practice we don't want to waste (human) resources on that. Instead, we would setup an alerting system. An **alert** is an action that is triggered when a certain condition is met. A condition might be a carefully selected threshold or a level which, when reached, triggers an event (alert).
+Dashboards are great for actively checking system metrics. However, in practice we don't want to waste (human) resources on that. Instead, we would set up an alerting system. An **alert** is an action that is triggered when a certain condition is met. A condition might be a carefully selected threshold, or a level which, when reached, triggers an event (alert).
 
 Alerts are distributed and processed via **notifications** and **webhooks**.
 
